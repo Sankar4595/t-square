@@ -1,5 +1,9 @@
 import React from "react";
-import { Card, Button } from "antd";
+import { Layout, Menu, Card, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+
+const { Header, Content } = Layout;
 
 const techBridgeData = [
   {
@@ -36,22 +40,57 @@ const techBridgeData = [
 
 const TechBridgeUI = () => {
   return (
-    <div className="techbridge-container">
-      <h3 className="techbridge-title">
-        Bridging the gap beyond borders to realize the full potential and unlock
-        value.
-      </h3>
-
-      <div className="techbridge-grid">
-        {techBridgeData.map((item, index) => (
-          <Card key={index} title={item.title} className="techbridge-card">
-            <p>{item.description}</p>
-            <Button type="primary">Connect</Button>
-          </Card>
-        ))}
-      </div>
-    </div>
+    <AppContainer>
+      <Content className="content-container">
+        <h3 className="techbridge-title">
+          Bridging the gap beyond borders to realize the full potential and
+          unlock value.
+        </h3>
+        <div className="techbridge-grid">
+          {techBridgeData.map((item, index) => (
+            <Card key={index} title={item.title} className="techbridge-card">
+              <p>{item.description}</p>
+              <Button type="primary">Connect</Button>
+            </Card>
+          ))}
+        </div>
+      </Content>
+    </AppContainer>
   );
 };
 
 export default TechBridgeUI;
+
+const AppContainer = styled(Layout)`
+  width: 100%;
+  .content-container {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: calc(100vh - 130px);
+    overflow: auto;
+  }
+  .techbridge-title {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 20px;
+  }
+  .techbridge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-content: center;
+  }
+  .techbridge-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .techbridge-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+`;

@@ -43,6 +43,30 @@ export const LandingContainer = styled.div`
       font-weight: 500;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    padding: 20px 0;
+
+    .container-left,
+    .container-right {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+    }
+
+    .card {
+      width: 80%;
+      margin: 10px 0;
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 `;
 
 export const VisionContainer = styled.div`
@@ -60,6 +84,18 @@ export const VisionContainer = styled.div`
     bottom: -10px;
     right: 20px;
     font-weight: bolder;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+    text-align: center;
+
+    .ant-btn {
+      position: static;
+      margin-top: 10px;
+    }
   }
 `;
 
@@ -81,4 +117,9 @@ export const VisionText = styled.p`
   font-size: 14px;
   line-height: 3;
   margin-bottom: 15px;
+
+  @media (max-width: 768px) {
+    line-height: 2;
+    font-size: 12px;
+  }
 `;

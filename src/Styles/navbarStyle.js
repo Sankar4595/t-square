@@ -31,14 +31,26 @@ export const NavBarContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     border-bottom: 3px solid #fff;
+    padding: 0 20px;
   }
-  .ant-menu-item {
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
     color: #fff;
-    font-weight: 500;
-    font-size: 21px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .menu-container {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    justify-content: space-between;
   }
   .menu-list {
-    justify-content: left !important;
+    display: flex;
+    align-items: center;
+    gap: 20px;
     padding-left: 40px;
   }
   .MyAccount {
@@ -62,27 +74,41 @@ export const NavBarContainer = styled.div`
     box-shadow: none !important;
   }
 
-  .techbridge-container {
-    padding: 15px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
+  .ant-menu-item {
+    color: #fff;
+    font-weight: 500;
+    font-size: 21px;
   }
-  .techbridge-title {
-    font-size: 14px;
-    text-align: center;
-    color: #444;
-    margin-bottom: 10px;
+  .ant-menu-item-active::after {
+    border-bottom-color: #373739 !important;
+    color: #fff;
   }
-  .techbridge-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+  .ant-menu-item-selected {
+    color: #fff !important;
   }
-  .techbridge-card {
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 10px;
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+    .menu-container {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #373739;
+      flex-direction: column;
+    }
+    .menu-container.visible {
+      display: flex;
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .top-message {
+      display: none;
+    }
   }
 `;

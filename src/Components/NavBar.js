@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavBarContainer } from "../Styles/navbarStyle";
 import { Button, Menu, Dropdown } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
 import logo from "../assets/logo.svg";
 import TechBridgeUI from "./TechBridge";
 
@@ -22,20 +22,24 @@ const accountMenu = (
   </Menu>
 );
 
-const contactMenu = (
-  <Menu>
-    <Menu.Item key="suggestion" disabled style={{ fontWeight: "bold" }}>
-      Our Suggestions
-    </Menu.Item>
-    <Menu.Item key="consulting">🌐 Visit us for consulting..</Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="about">📘 About Us</Menu.Item>
-    <Menu.Item key="join">👥 Join Us</Menu.Item>
-    <Menu.Item key="support">💬 Help & Support</Menu.Item>
-  </Menu>
-);
+const ContactMenu = () => {
+  return (
+    <Menu>
+      <Menu.Item key="suggestion" disabled style={{ fontWeight: "bold" }}>
+        Our Suggestions
+      </Menu.Item>
+      <Menu.Item key="consulting">🌐 Visit us for consulting..</Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="about">📘 About Us</Menu.Item>
+      <Menu.Item key="join">👥 Join Us</Menu.Item>
+      <Menu.Item key="support">💬 Help & Support</Menu.Item>
+    </Menu>
+  );
+};
 
 const NavBar = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+
   return (
     <NavBarContainer>
       <div className="top-message">
@@ -50,42 +54,48 @@ const NavBar = () => {
           <img style={{ width: 40, height: 40 }} src={logo} alt="logo" />
           <h2>T-Square</h2>
         </div>
-        <Menu
-          mode="horizontal"
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            background: "#373739",
-            color: "#fff",
-          }}
-          className="menu-list"
-        >
-          <Menu.Item key="talent">Talent</Menu.Item>
-          <Menu.Item key="technology">Technology</Menu.Item>
-          <Dropdown
-            overlay={<TechBridgeUI />}
-            trigger={["click"]}
-            placement="bottomCenter"
+        <Button
+          className="menu-toggle"
+          icon={<MenuOutlined />}
+          onClick={() => setMenuVisible(!menuVisible)}
+        />
+        <div className={`menu-container ${menuVisible ? "visible" : ""}`}>
+          <Menu
+            mode="horizontal"
+            className="menu-list"
+            style={{ background: "#373739", color: "#fff" }}
           >
-            <Menu.Item key="techbridge">
-              TechBridge <DownOutlined />
-            </Menu.Item>
+            <Menu.Item key="talent">Talent</Menu.Item>
+            <Menu.Item key="technology">Technology</Menu.Item>
+            <Dropdown
+              overlay={<TechBridgeUI />}
+              trigger={["click"]}
+              placement="bottomCenter"
+            >
+              <Menu.Item key="techbridge">
+                TechBridge <DownOutlined />
+              </Menu.Item>
+            </Dropdown>
+            <Dropdown
+              overlay={<ContactMenu />}
+              trigger={["click"]}
+              placement="bottomCenter"
+            >
+              <Menu.Item key="contact">
+                Contact <DownOutlined />
+              </Menu.Item>
+            </Dropdown>{" "}
+          </Menu>
+          <Dropdown overlay={accountMenu} trigger={["click"]}>
+            <Button
+              className="MyAccount"
+              icon={<UserOutlined className="account-icon" />}
+              type="default"
+            >
+              My Account
+            </Button>
           </Dropdown>
-          <Dropdown overlay={contactMenu} trigger={["click"]}>
-            <Menu.Item key="contact">
-              Contact <DownOutlined />
-            </Menu.Item>
-          </Dropdown>{" "}
-        </Menu>
-        <Dropdown overlay={accountMenu} trigger={["click"]}>
-          <Button
-            className="MyAccount"
-            icon={<UserOutlined className="account-icon" />}
-            type="default"
-          >
-            My Account
-          </Button>
-        </Dropdown>
+        </div>
       </div>
     </NavBarContainer>
   );
