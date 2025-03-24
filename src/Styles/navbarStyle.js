@@ -12,6 +12,10 @@ export const NavBarContainer = styled.div`
       width: 250px;
     }
   }
+  .ant-menu-title-content:hover,
+  .ant-menu-overflow-item:hover {
+    color: #ebe6e2 !important;
+  }
   p {
     padding: 0px;
     margin: 0px;

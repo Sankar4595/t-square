@@ -4,23 +4,29 @@ import { Button, Menu, Dropdown } from "antd";
 import { DownOutlined, UserOutlined, MenuOutlined } from "@ant-design/icons";
 import logo from "../assets/logo.svg";
 import TechBridgeUI from "./TechBridge";
+import { useNavigate } from "react-router-dom";
 
 const userEmail = "95sankar@gmail.com"; // Replace with dynamic data if needed
 
-const accountMenu = (
-  <Menu>
-    <Menu.Item
-      key="email"
-      disabled
-      style={{ cursor: "default", fontWeight: "bold" }}
-    >
-      {userEmail}
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="profile">My Profile</Menu.Item>
-    <Menu.Item key="registration">My Registration</Menu.Item>
-  </Menu>
-);
+const AccountMenu = () => {
+  const navigate = useNavigate();
+  return (
+    <Menu>
+      <Menu.Item
+        key="email"
+        disabled
+        style={{ cursor: "default", fontWeight: "bold" }}
+      >
+        {userEmail}
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="profile">My Profile</Menu.Item>
+      <Menu.Item key="registration" onClick={() => navigate("/register")}>
+        My Registration
+      </Menu.Item>
+    </Menu>
+  );
+};
 
 const ContactMenu = () => {
   return (
@@ -86,7 +92,7 @@ const NavBar = () => {
               </Menu.Item>
             </Dropdown>{" "}
           </Menu>
-          <Dropdown overlay={accountMenu} trigger={["click"]}>
+          <Dropdown overlay={<AccountMenu />} trigger={["click"]}>
             <Button
               className="MyAccount"
               icon={<UserOutlined className="account-icon" />}
