@@ -1,11 +1,8 @@
-import React from "react";
 import {
   RegisterContainer,
-  TitleReg,
   VisionContainerReg,
 } from "../Styles/registrationStyle";
-import { Button, Form, Input, Radio } from "antd";
-import google from "../assets/google.svg";
+import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { API_URL } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +13,9 @@ const Login = () => {
     try {
       const res = await axios.post(`${API_URL}users/login`, event);
       console.log("res: ", res);
+      if (res) {
+        localStorage.setItem("user", JSON.stringify(res?.data?.data))
+      }
     } catch (error) {
       console.log("error: ", error);
     } finally {
@@ -28,7 +28,7 @@ const Login = () => {
       <div className="container-right">
         <VisionContainerReg>
           <div className="btn-social">
-            <TitleReg
+            {/* <TitleReg
               icon={<img width={15} height={15} src={google} alt="google" />}
             >
               Sign in or Login with Google
@@ -36,7 +36,7 @@ const Login = () => {
 
             <div className="optional-reg">
               <hr /> Or <hr />
-            </div>
+            </div> */}
           </div>
           <Form onFinish={onFinish} layout="horizontal">
             <Form.Item
